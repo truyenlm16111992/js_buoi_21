@@ -24,7 +24,10 @@ function checkEmail(_string, _selector, _msgError) {
     return checkRegex(_string, regex, _selector, _msgError);
 }
 function checkPassword(_string, _selector, _msgError) {
-    regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{0,}$/;
+    //Gồm số, chữ thường, chữ in hoa, kí tự đặc biệt
+    //regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{0,}$/;
+    //Tương tự không ràng buộc phải có chữ thường
+    regex = /^(?=.*\d)(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{0,}$/;
     return checkRegex(_string, regex, _selector, _msgError);
 }
 function checkDateFormat(_string, _selector, _msgError) {
