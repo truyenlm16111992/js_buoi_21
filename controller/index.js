@@ -71,11 +71,18 @@ function getEmployee(_isEdit=false) {
         +workHours,
     );
     let isValid = true;
-    isValid &= checkStringLength(obj.userCode, 1, undefined, "#lbWarningUserCode", "Tài khoản không được để trống.") && checkStringLength(obj.userCode, 4, 6, "#lbWarningUserCode", "Tài khoản là chuỗi có độ dài từ 4 đến 6 kí tự.")&&(!_isEdit&&list.findByUserCode(obj.userCode)!==-1?showMessage("#lbWarningUserCode", `Tài khoản '${obj.userCode}' đã tồn tại.`):showMessage("#lbWarningUserCode", ""));
+    //Tài khoản độ dài 4-6 ký tự
+    //isValid &= checkStringLength(obj.userCode, 1, undefined, "#lbWarningUserCode", "Tài khoản không được để trống.") && checkStringLength(obj.userCode, 4, 6, "#lbWarningUserCode", "Tài khoản là chuỗi có độ dài từ 4 đến 6 kí tự.")&&(!_isEdit&&list.findByUserCode(obj.userCode)!==-1?showMessage("#lbWarningUserCode", `Tài khoản '${obj.userCode}' đã tồn tại.`):showMessage("#lbWarningUserCode", ""));
+
+    //Tài khoản độ dài 4-6 ký số và chữ alpha
+    //isValid &= checkStringLength(obj.userCode, 1, undefined, "#lbWarningUserCode", "Tài khoản không được để trống.") && checkRegex(obj.userCode,/^[0-9a-zA-Z]{4,6}$/, "#lbWarningUserCode", "Tài khoản là chuỗi có độ dài từ 4 đến 6 kí số.")&&(!_isEdit&&list.findByUserCode(obj.userCode)!==-1?showMessage("#lbWarningUserCode", `Tài khoản '${obj.userCode}' đã tồn tại.`):showMessage("#lbWarningUserCode", ""));
+
+    //Tài khoản độ dài 4-6 ký số
+    isValid &= checkStringLength(obj.userCode, 1, undefined, "#lbWarningUserCode", "Tài khoản không được để trống.") && checkRegex(obj.userCode,/^[0-9]{4,6}$/, "#lbWarningUserCode", "Tài khoản là chuỗi có độ dài từ 4 đến 6 kí số.")&&(!_isEdit&&list.findByUserCode(obj.userCode)!==-1?showMessage("#lbWarningUserCode", `Tài khoản '${obj.userCode}' đã tồn tại.`):showMessage("#lbWarningUserCode", ""));
     isValid &= checkStringLength(obj.userName, 1, undefined, "#lbWarningUserName", "Họ và tên không được để trống.") && checkVietnameseLetters(obj.userName, "#lbWarningUserName", "Họ và tên phải là chuỗi gồm các kí tự chữ.");
     isValid &= checkStringLength(obj.userEmail, 1, undefined, "#lbWarningUserEmail", "Email không được để trống.") && checkEmail(obj.userEmail, "#lbWarningUserEmail", "Email không đúng định dạng.");
     isValid &= checkStringLength(obj.password, 1, undefined, "#lbWarningPassword", "Mật khẩu không được để trống.") && checkStringLength(obj.password, 6, 10, "#lbWarningPassword", "Mật khẩu là chuỗi có độ dài từ 6 đến 10 kí tự.") && checkPassword(obj.password, "#lbWarningPassword", "Mật khẩu phải chứa ít nhất 1 ký tự số, 1 ký tự in hoa và 1 ký tự đặc biệt.");
-    isValid &= checkStringLength(obj.workingDay, 1, undefined, "#lbWarningWorkingDay", "Ngày làm việc không được để trống.") && checkDateFormat(obj.workingDay, "#lbWarningWorkingDay", "Ngày làm việc không đúng định dạng dd/mm/yyyy");
+    isValid &= checkStringLength(obj.workingDay, 1, undefined, "#lbWarningWorkingDay", "Ngày làm việc không được để trống.") && checkDateFormat(obj.workingDay, "#lbWarningWorkingDay", "Ngày làm việc không đúng định dạng mm/dd/yyyy");
     isValid &= checkStringLength(basicSalary, 1, undefined, "#lbWarningBasicSalary", "Lương cơ bản không được để trống.") && (Number.isInteger(obj.basicSalary) ? showMessage("#lbWarningBasicSalary", "") : !showMessage("#lbWarningBasicSalary", "Lương cơ bản phải là số nguyên từ 1 000 000 đến 20 000 000.")) && checkRangeNumber(obj.basicSalary, 1000000, 20000000, "#lbWarningBasicSalary", "Lương cơ bản phải là số nguyên từ 1 000 000 đến 20 000 000.");
     isValid &= obj.jobTitle === "Chọn chức vụ" ? !showMessage("#lbWarningJobTitle", "Chức vụ không hợp lệ.") : showMessage("#lbWarningJobTitle", "");
     isValid &= checkStringLength(workHours, 1, undefined, "#lbWarningWorkHours", "Giờ làm việc không được để trống.") && (Number.isInteger(obj.workHours) ? showMessage("#lbWarningWorkHours", "") : !showMessage("#lbWarningWorkHours", "Giờ làm việc phải là số nguyên từ 80 đến 200 giờ.")) && checkRangeNumber(obj.workHours, 80, 200, "#lbWarningWorkHours", "Giờ làm việc phải là số nguyên từ 80 đến 200 giờ.");

@@ -31,7 +31,7 @@ function checkPassword(_string, _selector, _msgError) {
     return checkRegex(_string, regex, _selector, _msgError);
 }
 function checkDateFormat(_string, _selector, _msgError) {
-    regex = /^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/]\d{4}$/;
+    regex = /^(0?[1-9]|1[012])[\/](0?[1-9]|[12][0-9]|3[01])[\/]\d{4}$/;
     return checkRegex(_string, regex, _selector, _msgError);
 }
 function checkRangeNumber(_number, _min, _max, _selector, _msgError) {
